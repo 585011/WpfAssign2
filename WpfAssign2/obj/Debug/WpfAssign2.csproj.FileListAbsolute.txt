@@ -1,0 +1,16 @@
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.csproj.AssemblyReference.cache
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.csproj.SuggestedBindingRedirects.cache
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\MainWindow.g.cs
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\App.g.cs
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2_MarkupCompile.cache
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2_MarkupCompile.lref
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\bin\Debug\WpfAssign2.exe.config
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\bin\Debug\WpfAssign2.exe
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\bin\Debug\WpfAssign2.pdb
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\MainWindow.baml
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.g.resources
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.Properties.Resources.resources
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.csproj.GenerateResource.cache
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.csproj.CoreCompileInputs.cache
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.exe
+C:\Users\nitra\source\repos\WpfAssign2\WpfAssign2\obj\Debug\WpfAssign2.pdb
