@@ -37,6 +37,8 @@ namespace WpfAssign2
             Console.WriteLine("Color: " + color);
         }
 
+
+
         public Tuple<double, double> calcPosition(double time)
         {
             // Use orbital radius and orbital period to calc pos relative to the planet's pos
@@ -45,7 +47,7 @@ namespace WpfAssign2
             double ts;
             if (orbitalRadius == 0)
             {
-                x = orbitalRadius; y = 1;
+                x = 1; y = 1;
                 ts = 0.0;
             }
             else

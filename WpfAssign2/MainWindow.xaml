@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Name ="myGrid" >
-        <Canvas Margin="10,10,9,8" Name="PCanvas"/>
+        <Canvas Margin="0,0,0,0" Name="PCanvas"/>
+        <Canvas Margin="0,0,0,0" Name ="ObjLabels" Visibility="Visible"/>
     </Grid>
 </Window>
