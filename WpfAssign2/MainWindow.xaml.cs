@@ -26,7 +26,6 @@ namespace WpfAssign2
         private double xOri;
         private double yOri;
         int time = 0;
-        public event Action<int> MoveIt;
         SpaceObject Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto;
         private System.Windows.Threading.DispatcherTimer t;
         public MainWindow()
@@ -42,6 +41,7 @@ namespace WpfAssign2
                 yOri = WinScr.Height/2;
                 lableDisplayer();
                 makeSpeedButton();
+                makeMenuBar();
                 createSolarS();
 
                 t = new System.Windows.Threading.DispatcherTimer
@@ -58,13 +58,17 @@ namespace WpfAssign2
         private void T_Tick(Object sender, EventArgs e)
         {
             clearSolarSystem();
+            clearLabels();
             time += 1;
             createSolarS();
             lableDisplayer();
-            makeSpeedButton();
+            //makeSpeedButton();
+            makeMenuBar();
             
         }
 
+
+        // Method that clears the space objects from the canvas (used to make sure it doesnt draw the objs in "lines")
         private void clearSolarSystem()
         {
             for (int i = PCanvas.Children.Count - 1; i >= 0; i--)
@@ -77,34 +81,49 @@ namespace WpfAssign2
             }
         }
 
+        // Method that clears the labels from the canvas (so it doesnt make "circles" of labels in the canvas)
+        private void clearLabels()
+        {
+            for(int i = ObjLabels.Children.Count-1; i >= 0; i--)
+            {
+                UIElement labelobj = ObjLabels.Children[i];
+                if(labelobj is Label)
+                {
+                    ObjLabels.Children.Remove(labelobj);
+                }
+            }
+        }
 
 
         
 
         private void speedUp(object sender, RoutedEventArgs e)
         {
-            time += 1;
+            t.Interval = t.Interval.Subtract(new TimeSpan(5000));
         }
         private void speedDown(object sender, RoutedEventArgs e)
         {
-            time += -1;
+            t.Interval = t.Interval.Add(new TimeSpan(5000));
         }
 
+
+        // Method for creating the speed up/down buttons in the canvas and adding events when clicking them.
         private void makeSpeedButton()
         {
             Button b1 = new Button()
             {
-                Content = "Speed Up!",
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left
+                Content = "Speed Up!"
             };
+            Canvas.SetLeft(b1, 0);
+            Canvas.SetTop(b1, 30);
 
             Button b2 = new Button()
             {
-                Content = "Slow down!",
-                VerticalAlignment= VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left
+                Content = "Slow down!"
             };
+            Canvas.SetLeft(b2, 0);
+            Canvas.SetTop(b2, 50);
+            
 
 
             b1.Click += new RoutedEventHandler(speedUp);
@@ -113,6 +132,8 @@ namespace WpfAssign2
             PCanvas.Children.Add(b2);
 
         }
+
+        // Method for creating the list with actual values of the solar system.
         private List<SpaceObject> makeObjects()
         {
             List<SpaceObject> solarSystem = new List<SpaceObject>();
@@ -129,11 +150,13 @@ namespace WpfAssign2
             
             solarSystem.AddRange(new List<SpaceObject>
         {
-            Sun, Earth, Mercury, Mars, Venus, Jupiter, Saturn, Uranus, Neptune, Pluto,
+            Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto,
             //new Asteroid("Asteroid belt", 478713, 1095.0, 308171, 0.0, "Gray")
         });
             return solarSystem;
         }
+
+        // Method for creating the list of the objects to be displayed
         private List<SpaceObject> displayObjects()
         {
             List<SpaceObject> displaySystem = new List<SpaceObject>();
@@ -146,16 +169,18 @@ namespace WpfAssign2
             Saturn = new Planet("Saturn", 350, 10759.5, 58232.0, 0.445, "Yellow");
             Uranus = new Planet("Uranus", 390, 30685.0, 25362.0, 0.718, "LightBlue");
             Neptune = new Planet("Neptune", 440, 60190.0, 24622.0, 0.67, "Azure");
-            Pluto = new DwarfPlanet("Pluto", 470, 90550.0, 1188.0, 6.39, "White");
+            Pluto = new DwarfPlanet("Pluto", 450, 90550.0, 1188.0, 6.39, "White");
 
             displaySystem.AddRange(new List<SpaceObject>
         {
-            Sun, Earth, Mercury, Mars, Venus, Jupiter, Saturn, Uranus, Neptune, Pluto,
+            Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto,
             //new Asteroid("Asteroid belt", 478713, 1095.0, 308171, 0.0, "Gray")
         });
             return displaySystem;
         }
 
+
+        // Method for creating the moon list
         private void makeMoons()
         {
             moons.AddRange(new List<Moon>
@@ -170,57 +195,8 @@ namespace WpfAssign2
             });
         }
 
-    
-
-        public Ellipse drawObjects(Tuple<double,double> coord, int i)
-        {
-            double x = 0;
-            double y = 0;
-            Canvas c = new Canvas();
-
-            Color col = (Color)ColorConverter.ConvertFromString(solarSystem[i].color);
-            SolidColorBrush scb = new SolidColorBrush(col);
-
-            Ellipse ellip = new Ellipse()
-            {
-
-                Name = solarSystem[i].name,
-                Fill = scb,
-                Width = 30 * Math.Log(solarSystem[i].objectRadius),
-                Height = 30 * Math.Log(solarSystem[i].objectRadius)
-
-            };
-            // To scale, use 30*log(objectRadius)
-            x = (10*Math.Log(coord.Item1)) + xOri - ellip.ActualWidth;
-            y = (10*Math.Log(coord.Item2)) + yOri - ellip.ActualHeight;
-            Canvas.SetLeft(ellip, x);
-            Canvas.SetTop(ellip, y);
-            
-
-            return ellip;
-
-        }
-
-        //public Ellipse drawOrbit (Tuple<double,double> coord, int i)
-        //{
-        //    double x = 0;
-        //    double y = 0;
-        //    Ellipse elOrb = new Ellipse()
-        //    {
-        //        Width = 30 * Math.Log(solarSystem[i].objectRadius),
-        //        Height = 30 * Math.Log(solarSystem[i].objectRadius),
-
-        //    };
-        //}
-
-        //public void moveObjects()
-        //{
-        //    for(int i = 0; i < solarSystem.Count; i++)
-        //    {
-        //        Ellipse ellip;
-        //    }
-        //}
-
+   
+        // Method for creating labels for a space object
         private Label makeLabels(SpaceObject o)
         {
             Label label = new Label()
@@ -232,23 +208,14 @@ namespace WpfAssign2
             
         }
     
+        // Calculates the position of a space object and returns a tuple with x and y coords.
         public Tuple<double,double> calcPos(SpaceObject obj, int time)
         {
             return obj.calcPosition(time);
         }
-        public static SpaceObject findParentObj(String name, List<SpaceObject> list)
-        {
-            SpaceObject parent = null;
-            foreach (SpaceObject o in list)
-            {
-                if (o.name.Equals(name))
-                {
-                    parent = o;
-                }
-            }
-            return parent;
-        }
 
+
+        // Method for drawing the objects in the canvas.
         public void createSolarS()
         {
             double x;
@@ -289,8 +256,6 @@ namespace WpfAssign2
                     //Height = Math.Log(o.objectRadius)
                 };
 
-                //ellip.MouseLeftButtonDown += LButtonDown;
-
                 if (ellip.Name.Contains("Sun"))
                 {
                     ellip.Width = 8*Math.Log(o.objectRadius);
@@ -330,20 +295,37 @@ namespace WpfAssign2
             }
         }
 
-        private void LButtonDown(object sender, MouseButtonEventArgs e)
+
+        // Method that creates a menu item from a space object and adds event when menu item is clicked
+        private void makeMenuBar()
         {
-            SpaceObject pl = null;
-            Ellipse ellip = (Ellipse)sender;
-            foreach(SpaceObject o in displaySystem)
+            foreach (SpaceObject o in solarSystem)
             {
-                if (o.name.Equals(ellip.Name))
+                MenuItem m = new MenuItem()
                 {
-                    pl = o;
-                }
+                    Name = o.name
+                };
+                m.Header = o.name;
+
+                Meny.Items.Add(m);
+                m.Click += new RoutedEventHandler(ShowInfo);
             }
-            MessageBox.Show(findParentPlanet(pl));
         }
 
+        // Method to display when menu item is clicked
+        private void ShowInfo(object sender, RoutedEventArgs e)
+        {
+            MenuItem m = (MenuItem)sender;
+            foreach (SpaceObject o in solarSystem)
+            {
+                if (o.name.Equals(m.Name))
+                {
+                  MessageBox.Show(findParentPlanet(o));
+                }
+            }
+        }
+
+        // Method for adding labels to the canvas
         private void lableDisplayer()
         {
             Button b = new Button
@@ -357,6 +339,8 @@ namespace WpfAssign2
             PCanvas.Children.Add(b);
         }
 
+
+        // Method that uses routed event and show/hides the labels in the canvas
         private void showLabels(object sender, RoutedEventArgs e)
         {
             if(ObjLabels.Visibility == Visibility.Visible)
@@ -370,6 +354,8 @@ namespace WpfAssign2
             }
         }
 
+
+        // Method that returns a string form of the info about a moon, with a space object/parent as input
         public static String findParentPlanet(SpaceObject plan)
         {
             foreach (Moon moon in moons)
@@ -377,9 +363,12 @@ namespace WpfAssign2
                 if (moon.parentPlanet.name.Equals(plan.name))
                 {
                     return moon.ToString();
+                } if (plan.name.Equals("Sun"))
+                {
+                    return plan.ToString();
                 }
             }
-            return "Moons displayed";
+            return "No moons added to display";
         }
 
     }

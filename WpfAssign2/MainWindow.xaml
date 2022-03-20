@@ -9,5 +9,6 @@
     <Grid Name ="myGrid" >
         <Canvas Margin="0,0,0,0" Name="PCanvas"/>
         <Canvas Margin="0,0,0,0" Name ="ObjLabels" Visibility="Visible"/>
+        <Menu Height="20" Name="Meny" Width="500" Margin="0,400,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></Menu>
     </Grid>
 </Window>

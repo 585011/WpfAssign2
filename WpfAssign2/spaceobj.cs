@@ -39,6 +39,7 @@ namespace WpfAssign2
 
 
 
+        // Calculates the position of a planet.
         public Tuple<double, double> calcPosition(double time)
         {
             // Use orbital radius and orbital period to calc pos relative to the planet's pos
@@ -77,6 +78,12 @@ namespace WpfAssign2
             Console.Write("Star  : ");
             base.Draw();
         }
+        public override string ToString()
+        {
+            return ("Name: " + name + " / Orbit radius: " + orbitalRadius + " (000 km)" + " / Orbital period: " + orbitalPeriod + " Days"
+                + " / Object radius: " + objectRadius + " (000 km)" + " / Rot.peroid: " + rotationalPeriod + " Days" + " / Color: " + color)
+                + "\nOrbited by: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto";
+        }
     }
 
     public class Planet : SpaceObject
@@ -105,8 +112,8 @@ namespace WpfAssign2
 
         public override string ToString()
         {
-            return ("Name: " + name + " / Orbit radius: " + orbitalRadius + " / Orbital period: " + orbitalPeriod
-                + " / Object radius: " + objectRadius + " / Rot.peroid: " + rotationalPeriod + " / Color: " + color);
+            return ("Name: " + name + " / Orbit radius: " + orbitalRadius + " (000 km)" + " / Orbital period: " + orbitalPeriod + " Days"
+                + " / Object radius: " + objectRadius + " (000 km)" + " / Rot.peroid: " + rotationalPeriod + " Days" + " / Color: " + color);
         }
     }
 
